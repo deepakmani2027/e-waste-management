@@ -1,0 +1,57 @@
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/.pnpm/next@15.2.4_react-dom@19.0.0_react@19.0.0__react@19.0.0/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/.pnpm/next@15.2.4_react-dom@19.0.0_react@19.0.0__react@19.0.0/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./components/sidebar-effects.module.css ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/* Active gradient glow behind the icon button */
+.sidebar-effects_glowActive__feJSv {
+  background: radial-gradient(24px 24px at 50% 50%, rgba(16,185,129,0.25), rgba(16,185,129,0) 70%);
+  box-shadow:
+    0 0 0 1px rgba(16,185,129,0.25) inset,
+    0 8px 24px -8px rgba(16,185,129,0.55),
+    0 0 32px -10px rgba(147,51,234,0.35);
+}
+
+/* Ripple on click */
+@keyframes sidebar-effects_ew-ripple__il_E_ {
+  0%   { transform: scale(0.2); opacity: 0.55; }
+  80%  { transform: scale(1);   opacity: 0.15; }
+  100% { transform: scale(1.15); opacity: 0; }
+}
+.sidebar-effects_ripple__vdIqv {
+  position: absolute;
+  inset: 0;
+  border-radius: 0.75rem; /* ~rounded-xl */
+  background: radial-gradient(closest-side, rgba(16,185,129,0.35), rgba(16,185,129,0) 70%);
+  animation: sidebar-effects_ew-ripple__il_E_ 450ms ease-out forwards;
+  pointer-events: none;
+}
+
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/.pnpm/next@15.2.4_react-dom@19.0.0_react@19.0.0__react@19.0.0/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/.pnpm/next@15.2.4_react-dom@19.0.0_react@19.0.0__react@19.0.0/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./components/gradient-scrollbar.module.css ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.gradient-scrollbar_gradientScroll__RqLZi {
+  overflow-y: auto;
+}
+
+/* WebKit scrollbars (Chrome, Edge, Safari) */
+.gradient-scrollbar_gradientScroll__RqLZi::-webkit-scrollbar {
+  width: 12px;
+}
+.gradient-scrollbar_gradientScroll__RqLZi::-webkit-scrollbar-track {
+  background: linear-gradient(180deg, rgba(16,185,129,0.12), rgba(13,148,136,0.12), rgba(147,51,234,0.12));
+  border-left: 1px solid hsl(240 5% 94%);
+}
+.gradient-scrollbar_gradientScroll__RqLZi::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgb(16,185,129), rgb(13,148,136), rgb(147,51,234));
+  border-radius: 999px;
+  border: 2px solid white;
+}
+.gradient-scrollbar_gradientScroll__RqLZi::-webkit-scrollbar-thumb:hover {
+  filter: brightness(0.95);
+}
+
+/* Firefox */
+.gradient-scrollbar_gradientScroll__RqLZi {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(16,185,129) transparent;
+}
+
