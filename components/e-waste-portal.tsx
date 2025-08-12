@@ -193,7 +193,7 @@ export default function EwastePortal() {
           </div>
           <div className="relative flex items-center gap-4 px-4 py-4 md:px-6 md:py-5">
             {/* 🔴 SIDEBAR TRIGGER - Enhanced hamburger menu button */}
-            <SidebarTrigger className="text-white/90 hover:text-white hover:bg-white/10 transition-all duration-200 rounded-lg p-2" />
+            <SidebarTrigger className="text-white/90 hover:text-white hover:bg-white/10 transition-all duration-200 rounded-lg p-2 hidden md:inline-flex" />
             
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-3">
