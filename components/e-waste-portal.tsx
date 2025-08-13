@@ -179,7 +179,7 @@ export default function EwastePortal() {
       <SidebarInset>
         <header 
           ref={headerRef as any}
-          className={`sticky top-0 z-10 overflow-hidden border-b border-transparent shadow-lg bg-gradient-to-r from-emerald-600 via-teal-600 to-purple-600 text-white transition-all duration-700 ease-out ${
+          className={`sticky top-0 z-[100] overflow-hidden border-b border-transparent shadow-lg bg-gradient-to-r from-emerald-600 via-teal-600 to-purple-600 text-white transition-all duration-700 ease-out ${
             headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
           }`}
         >

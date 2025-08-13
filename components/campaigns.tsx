@@ -76,8 +76,8 @@ export default function Campaigns({ items }: { items: EwItem[] }) {
   }, [items])
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[1fr_1fr] mt-4">
-      <Card 
+  <div className="flex flex-col gap-6 w-full mt-4">
+  <Card 
         ref={challengeRef as any}
         className={`transition-all duration-700 ease-out ${
           challengeInView 
@@ -109,9 +109,9 @@ export default function Campaigns({ items }: { items: EwItem[] }) {
               <p className="text-xs text-muted-foreground mt-1">Earn by reporting real items</p>
             </div>
           </div>
-          <div className="flex gap-3">
+          <div className="flex flex-col sm:flex-row gap-3 w-full">
             <Button
-              className="relative overflow-hidden bg-gradient-to-r from-emerald-500 via-teal-500 to-purple-600 hover:from-emerald-600 hover:via-teal-600 hover:to-purple-700 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-0.5"
+              className="relative overflow-hidden bg-gradient-to-r from-emerald-500 via-teal-500 to-purple-600 hover:from-emerald-600 hover:via-teal-600 hover:to-purple-700 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-0.5 w-full sm:w-auto"
               onClick={() => setJoined(true)}
               disabled={joined}
             >
@@ -129,7 +129,7 @@ export default function Campaigns({ items }: { items: EwItem[] }) {
                 // This is now just for demo - real points come from item reporting
                 alert(`You have ${userStats.totalPoints} real points from ${userStats.itemsReported} items! Report more items to earn points.`)
               }}
-              className="relative overflow-hidden border-2 border-gradient-to-r from-emerald-400 to-purple-400 hover:border-emerald-500 bg-white/90 backdrop-blur-sm hover:bg-gradient-to-r hover:from-emerald-50 hover:to-purple-50 transition-all duration-300 transform hover:scale-105 hover:-translate-y-0.5 shadow-md hover:shadow-lg"
+              className="relative overflow-hidden border-2 border-gradient-to-r from-emerald-400 to-purple-400 hover:border-emerald-500 bg-white/90 backdrop-blur-sm hover:bg-gradient-to-r hover:from-emerald-50 hover:to-purple-50 transition-all duration-300 transform hover:scale-105 hover:-translate-y-0.5 shadow-md hover:shadow-lg w-full sm:w-auto"
               style={{
                 background: 'linear-gradient(white, white) padding-box, linear-gradient(90deg, #10b981, #8b5cf6) border-box',
                 border: '2px solid transparent'
@@ -143,9 +143,9 @@ export default function Campaigns({ items }: { items: EwItem[] }) {
         </CardContent>
       </Card>
 
-      <Card 
+  <Card 
         ref={scoreboardRef as any}
-        className={`transition-all duration-700 ease-out ${
+  className={`transition-all duration-700 ease-out mt-6 lg:mt-0 ${
           scoreboardInView 
             ? 'opacity-100 translate-y-0' 
             : 'opacity-0 translate-y-8'

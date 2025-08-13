@@ -165,7 +165,7 @@ E-Waste Portal - ${new Date().toLocaleDateString()}`
           </div>
 
           {/* Sort button */}
-          <div className="col-span-6 sm:col-span-2 md:col-span-1 flex md:justify-center">
+          <div className="col-span-6 sm:col-span-2 md:col-span-1 flex flex-row items-center gap-2 md:justify-center md:items-stretch">
             <Label className="mb-1 block md:sr-only">Sort</Label>
             <Button
               variant="outline"

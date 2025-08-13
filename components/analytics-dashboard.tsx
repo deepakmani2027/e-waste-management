@@ -132,10 +132,10 @@ export default function AnalyticsDashboard({ items }: { items: EwItem[] }) {
                   dataKey="month" 
                   tickLine={false} 
                   axisLine={false} 
-                  tickMargin={12}
+                  tickMargin={24} // increased gap between label and axis
                   angle={-45}
                   textAnchor="end"
-                  height={80}
+                  height={100} // increased height for more space
                   tick={{ fontSize: 13, fill: 'hsl(var(--muted-foreground))' }}
                   interval={0}
                 />
