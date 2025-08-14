@@ -1,6 +1,8 @@
 "use client"
 
 import { useMemo, useState } from "react"
+
+// Distance/ETA removed per request
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -36,6 +38,8 @@ export default function Scheduling({
   const [vendorId, setVendorId] = useState<string>(vendors[0]?.id || "")
   const [selectedIds, setSelectedIds] = useState<string[]>([])
   const [notes, setNotes] = useState("")
+  const [deliveryAddress, setDeliveryAddress] = useState("")
+  // Map selection and live tracking removed
 
   // Animation hooks
   const { ref: createRef, isInView: createInView } = useScrollAnimation()
@@ -56,17 +60,19 @@ export default function Scheduling({
   }
 
   function schedule() {
-    if (!vendorId || selectedIds.length === 0) return
+    if (!vendorId || selectedIds.length === 0 || !deliveryAddress) return
     const pickup: Pickup = {
       id: `p-${Date.now()}`,
       date,
       vendorId,
       itemIds: selectedIds,
-      notes,
+      notes: `${notes}\nDelivery Address: ${deliveryAddress}`,
+      // You can extend Pickup type to store deliveryLocation if needed
     }
     onSchedule(pickup)
     setSelectedIds([])
     setNotes("")
+    setDeliveryAddress("")
   }
 
   return (
@@ -84,6 +90,10 @@ export default function Scheduling({
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid gap-2 col-span-2">
+              <Label htmlFor="delivery-address">Delivery Address <span className="text-red-500">*</span></Label>
+              <Input id="delivery-address" value={deliveryAddress} onChange={e => setDeliveryAddress(e.target.value)} placeholder="Enter delivery address" required />
+            </div>
             <div className="grid gap-2">
               <Label htmlFor="date">Pickup Date</Label>
               <Input id="date" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
@@ -162,10 +172,11 @@ export default function Scheduling({
             </Table>
             </div>
           </div>
+          {/* Distance and ETA removed per request */}
           <Button
             className="w-full bg-gradient-to-r from-emerald-600 via-teal-600 to-purple-600 text-white border-0"
             onClick={schedule}
-            disabled={selectedIds.length === 0 || !vendorId}
+            disabled={selectedIds.length === 0 || !vendorId || !deliveryAddress}
           >
             <ClipboardList className="w-4 h-4 mr-2" />
             Schedule Pickup ({selectedIds.length})

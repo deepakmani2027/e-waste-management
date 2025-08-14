@@ -1,3 +1,4 @@
+// Route: /login  (Login Page)
 "use client"
 
 import Link from "next/link"
@@ -31,7 +32,7 @@ function LoginScreen() {
   // If already authenticated, send to home
   useEffect(() => {
     if (!loading && isAuthenticated) {
-      router.replace("/")
+      router.replace("/#dashboard")
     }
   }, [loading, isAuthenticated, router])
 
@@ -41,12 +42,12 @@ function LoginScreen() {
     setError(null)
     const res = await login(email, password)
     setPending(false)
-    if (res.ok) router.replace("/")
+  if (res.ok) router.replace("/")
     else setError(res.message)
   }
 
   return (
-  <div className="min-h-screen bg-gradient-to-br from-[#8BC34A] via-[#00BFA6] to-[#7B2FF7]">
+  <div className="min-h-screen" style={{ background: 'linear-gradient(120deg, #a7f3d0 0%, #6d28d9 100%)' }}>
       <div className="max-w-[85%] container mx-auto flex min-h-screen items-center justify-center">
         {/* Left Side - Lottie Animation */}
         <div className="hidden lg:flex lg:w-1/2 items-center justify-center p-12">

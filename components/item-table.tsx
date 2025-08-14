@@ -20,6 +20,7 @@ import QRCode from "qrcode";
 // - High error correction for reliable scanning
 // - Compatible with any QR scanner app
 
+export type EwStatus = "Reported" | "Scheduled" | "Collected" | "Sorted" | "Processed" | "Recycled" | "Disposed";
 export type EwItem = {
   id: string
   qrId: string
@@ -29,10 +30,11 @@ export type EwItem = {
   ageMonths: number
   condition: "Good" | "Fair" | "Poor" | "Dead"
   notes?: string
-  status: "Reported" | "Scheduled" | "Collected" | "Recycled" | "Disposed"
+  status: "Reported" | "Scheduled" | "Collected" | "Sorted" | "Processed" | "Recycled" | "Disposed"
   createdAt: string
   classification: { type: "Recyclable" | "Reusable" | "Hazardous"; notes?: string }
   pickupId?: string
+  auditTrail?: Array<{ date: string; user: string; stage: string; status: string }>
   disposalHistory?: Array<{ date: string; user: string; action: string }>
   disposedAt?: string
   disposedBy?: string
@@ -60,6 +62,20 @@ export default function ItemTable({
   onScheduleQuick: (pickup: Pickup) => void
   onDelete: (id: string) => void
 }) {
+  // Helper to update status and audit trail (simulate QR scan)
+  const scanAndUpdateStatus = (item: EwItem, newStatus: EwStatus, stage: string) => {
+    const user = typeof window !== 'undefined' && localStorage.getItem('user') || 'system';
+    const now = new Date().toISOString();
+    const updated: EwItem = {
+      ...item,
+      status: newStatus,
+      auditTrail: [
+        ...(item.auditTrail || []),
+        { date: now, user, stage, status: newStatus }
+      ]
+    };
+    onUpdate(updated);
+  };
   const [qrcodeDataURL, setQrcodeDataURL] = useState<string | null>(null)
   const [currentItem, setCurrentItem] = useState<EwItem | null>(null)
   const [search, setSearch] = useState("")
@@ -102,7 +118,8 @@ export default function ItemTable({
 E-Waste Portal - ${new Date().toLocaleDateString()}`
     
     const url = await QRCode.toDataURL(qrText, { 
-      width: 320, 
+      // Generate higher resolution for crisp display/download, we will display smaller
+      width: 512, 
       margin: 2,
       errorCorrectionLevel: 'H',
       type: 'image/png',
@@ -234,19 +251,20 @@ E-Waste Portal - ${new Date().toLocaleDateString()}`
                           <QrCode className="w-4 h-4" />
                         </Button>
                       </DialogTrigger>
-                      <DialogContent className="max-w-md">
+                      <DialogContent className="w-[520px] max-w-[92vw] max-h-[70vh] sm:max-h-[85vh] overflow-y-auto p-6 mt-10 rounded-xl shadow-2xl border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 flex flex-col z-50">
                         <DialogHeader>
                           <DialogTitle>QR Code & Product Details</DialogTitle>
                         </DialogHeader>
-                        <div className="flex flex-col gap-4 min-h-[500px]"> {/* set min-height for consistent dialog size */}
+                        <div className="flex flex-col gap-5 min-h-0 flex-1 overflow-y-auto pr-1"> {/* scrollable content area */}
                           {/* QR Code Section */}
-                          <div className="flex flex-col items-center justify-center gap-3">
+                          <div className="flex flex-col items-center justify-center gap-3 self-center">
                             <Image
-                              src={qrcodeDataURL || "/placeholder.svg?height=320&width=320&query=qr%20placeholder"}
+                              src={qrcodeDataURL || "/placeholder.svg?height=220&width=220&query=qr%20placeholder"}
                               alt="QR Code"
-                              width={280}
-                              height={280}
-                              className="rounded-md border"
+                              width={220}
+                              height={220}
+                              sizes="220px"
+                              className="rounded-md border w-[220px] h-[220px] object-contain"
                             />
                             <Button
                               className="w-full"
@@ -322,8 +340,24 @@ E-Waste Portal - ${new Date().toLocaleDateString()}`
                                   <span className="text-xs">{new Date(currentItem.createdAt).toLocaleDateString()}</span>
                                 </div>
                               </div>
-                              {currentItem.disposalHistory && currentItem.disposalHistory.length > 0 && (
+                              {/* Audit Trail Section */}
+                              {currentItem.auditTrail && currentItem.auditTrail.length > 0 && (
                                 <div className="mt-auto pt-4">
+                                  <span className="text-muted-foreground font-semibold block mb-1">Audit Trail:</span>
+                                  <ul className="text-xs space-y-1 bg-gray-50 rounded p-2 border border-gray-200 max-h-40 overflow-y-auto">
+                                    {currentItem.auditTrail.map((h, idx) => (
+                                      <li key={idx} className="ml-2 flex items-center gap-2">
+                                        <span className="font-mono text-gray-700">{h.date ? new Date(h.date).toLocaleString() : ''}</span>
+                                        <span className="font-semibold text-blue-700">{h.user}</span>
+                                        <span className="text-gray-500">{h.stage} → {h.status}</span>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              )}
+                              {/* Disposal History Section (if any) */}
+                              {currentItem.disposalHistory && currentItem.disposalHistory.length > 0 && (
+                                <div className="mt-2">
                                   <span className="text-muted-foreground font-semibold block mb-1">Disposal History:</span>
                                   <ul className="text-xs space-y-1 bg-gray-50 rounded p-2 border border-gray-200">
                                     {currentItem.disposalHistory.map((h, idx) => (
@@ -336,6 +370,12 @@ E-Waste Portal - ${new Date().toLocaleDateString()}`
                                   </ul>
                                 </div>
                               )}
+                          {/* QR Scan/Status Update Buttons */}
+                          <div className="flex flex-wrap gap-2 mt-4">
+                            <Button size="sm" onClick={() => scanAndUpdateStatus(currentItem, "Collected", "Pickup")}>Mark as Collected</Button>
+                            <Button size="sm" onClick={() => scanAndUpdateStatus(currentItem, "Sorted", "Sorting")}>Mark as Sorted</Button>
+                            <Button size="sm" onClick={() => scanAndUpdateStatus(currentItem, "Processed", "Processing")}>Mark as Processed</Button>
+                          </div>
                             </div>
                           )}
                         </div>
@@ -420,3 +460,4 @@ E-Waste Portal - ${new Date().toLocaleDateString()}`
     </Card>
   )
 }
+

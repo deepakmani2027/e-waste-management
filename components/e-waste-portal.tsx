@@ -11,13 +11,15 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Download, ScanLine, Shield, Sparkles, TrendingUp, LogOut, Recycle } from 'lucide-react'
 import ItemForm from "./item-form"
 import ItemTable, { type EwItem } from "./item-table"
-import Scheduling, { type Pickup, type Vendor } from "./scheduling"
+import Scheduling, { type Pickup } from "./scheduling"
+import type { Vendor } from "./vendors"
 import ComplianceReport from "./compliance-report"
 import Campaigns from "./campaigns"
 import AnalyticsDashboard from "./analytics-dashboard"
 import Vendors from "./vendors"
 import { cn } from "@/lib/utils"
 import { useAuth } from "./auth/auth-context"
+import { useRouter } from "next/navigation"
 import { useScrollAnimation, useStaggeredAnimation } from "@/hooks/use-scroll-animation"
 
 const TAB_KEYS = ["items", "scheduling", "compliance", "campaigns", "analytics", "vendors"] as const
@@ -65,6 +67,7 @@ export default function EwastePortal() {
   }, [])
 
   const { user, logout } = useAuth()
+  const router = useRouter();
 
   // Persistence
   useEffect(() => {
@@ -191,7 +194,7 @@ export default function EwastePortal() {
             {/* Gradient overlay for depth */}
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/5" />
           </div>
-          <div className="relative flex items-center gap-4 px-4 py-4 md:px-6 md:py-5">
+          <div className="relative flex items-center gap-4 px-4 py-4 md:px-6 md:py-5 z-30">
             {/* 🔴 SIDEBAR TRIGGER - Enhanced hamburger menu button */}
             <SidebarTrigger className="text-white/90 hover:text-white hover:bg-white/10 transition-all duration-200 rounded-lg p-2 hidden md:inline-flex" />
             
@@ -232,7 +235,10 @@ export default function EwastePortal() {
             <Button 
               variant="secondary" 
               className="bg-white/20 border-white/30 text-white hover:bg-white/30 hover:border-white/40 transition-all duration-200 shadow-lg backdrop-blur-sm font-medium" 
-              onClick={logout}
+              onClick={() => {
+                logout();
+                router.replace("/login");
+              }}
             >
               <LogOut className="h-4 w-4 mr-2" />
               <span className="hidden sm:inline">Logout</span>
