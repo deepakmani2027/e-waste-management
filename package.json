@@ -6,7 +6,7 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-  "start": "next start"
+    "start": "next start"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -40,12 +40,16 @@
     "@radix-ui/react-tooltip": "latest",
     "@types/leaflet": "^1.9.20",
     "autoprefixer": "^10.4.20",
+    "axios": "^1.11.0",
     "bcryptjs": "latest",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "1.0.4",
+    "cors": "^2.8.5",
     "date-fns": "4.1.0",
+    "dotenv": "^17.2.1",
     "embla-carousel-react": "8.5.1",
+    "express": "^5.1.0",
     "geist": "latest",
     "input-otp": "1.4.1",
     "jose": "latest",
@@ -53,6 +57,7 @@
     "lucide-react": "^0.454.0",
     "next": "15.2.4",
     "next-themes": "latest",
+    "nodemailer": "^7.0.5",
     "qrcode": "latest",
     "react": "^19",
     "react-day-picker": "9.8.0",

@@ -33,7 +33,7 @@ export default function EwasteImageScroller() {
           100% { transform: translateX(-50%); }
         }
         .animate-ewaste-scroll {
-          animation: ewaste-scroll 30s linear infinite;
+          animation: ewaste-scroll 10s linear infinite;
         }
       `}</style>
     </div>

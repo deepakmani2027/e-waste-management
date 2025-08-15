@@ -6,6 +6,7 @@ import { AuthProvider, useAuth } from "@/components/auth/auth-context"
 import EwastePortal from "@/components/e-waste-portal"
 import EwasteImageScroller from "@/components/ewaste-image-scroller"
 import { Button } from "@/components/ui/button"
+import { Recycle } from "lucide-react"
 
 const features = [
   {
@@ -48,7 +49,7 @@ function HomeOrPortal() {
   if (loading) return null
   if (isAuthenticated) return <EwastePortal />
   return (
-    <main className="min-h-screen flex flex-col relative overflow-hidden">
+  <main className="min-h-screen flex flex-col relative overflow-hidden pt-[120px]">
       {/* Modern Diagonal Green-Purple Gradient Background */}
       <div
         className="absolute inset-0 -z-10 w-full h-full"
@@ -61,17 +62,20 @@ function HomeOrPortal() {
         <img src="https://lh4.googleusercontent.com/proxy/FG8StrgDZ0P24gx5Bj71-LmM0tuI4lO3XQi5hsD5Qmc9y3Ua0rrZzRNczasZZlziqQLLIsij1iJNUTrZpPp7zoR-nsWZPoWqkSVlb12TSqIrqSehVXn7LmPP" alt="girl cartoon" width={250} height={300} />
       </div>
       {/* Header */}
-      <header className="flex flex-col sm:flex-row justify-between items-center px-4 sm:px-8 py-4 sm:py-6 bg-white/80 shadow-sm sticky top-0 z-10 rounded-b-2xl backdrop-blur-md gap-3 sm:gap-0">
-        <div className="text-xl sm:text-2xl font-extrabold text-emerald-700 tracking-tight drop-shadow-lg text-center sm:text-left">E-Waste Management Portal</div>
+  <header className="fixed top-0 left-1/2 -translate-x-1/2 max-w-[98%] w-full mx-auto flex flex-col sm:flex-row justify-between items-center px-3 sm:px-8 py-2 sm:py-6 bg-white/60 shadow-sm z-40 rounded-2xl sm:rounded-4xl backdrop-blur-md gap-2 sm:gap-2 mb-6 sm:mb-12">
+        <div className="flex gap-2 sm:gap-4 items-center">
+          <Recycle className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 opacity-90 drop-shadow-lg" aria-hidden />
+          <div className="text-lg sm:text-2xl font-extrabold text-emerald-700 tracking-tight drop-shadow-lg text-center sm:text-left whitespace-nowrap">E-Waste Management Portal</div>
+        </div>
         <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 w-full sm:w-auto items-center sm:items-end justify-center sm:justify-end">
           <Button
             variant="outline"
-            className="transition-all hover:bg-emerald-100 hover:text-emerald-700 focus:ring-2 focus:ring-emerald-400 w-full sm:w-auto text-base sm:text-lg px-6 py-2"
+            className="transition-all hover:bg-emerald-100 hover:text-emerald-700 focus:ring-2 focus:ring-emerald-400 w-full sm:w-auto text-base sm:text-lg px-4 sm:px-6 py-2"
             onClick={() => router.push('/login')}
           >Login</Button>
           <Button
             variant="secondary"
-            className="transition-all bg-gradient-to-r from-emerald-400 to-blue-400 text-white shadow-md hover:from-emerald-500 hover:to-blue-500 focus:ring-2 focus:ring-blue-300 w-full sm:w-auto text-base sm:text-lg px-6 py-2"
+            className="transition-all bg-gradient-to-r from-emerald-400 to-blue-400 text-white shadow-md hover:from-emerald-500 hover:to-blue-500 focus:ring-2 focus:ring-blue-300 w-full sm:w-auto text-base sm:text-lg px-4 sm:px-6 py-2"
             onClick={() => router.push('/signup')}
           >Sign Up</Button>
         </div>
@@ -97,9 +101,9 @@ function HomeOrPortal() {
           <img
             src="https://ewasterecyclersindia.com/images/ewast.png"
             alt="E-Waste Illustration"
-            width={350}
-            height={350}
-            className="object-contain animate-float w-60 sm:w-[350px] h-auto"
+            width={600}
+            height={500}
+            className="object-contain animate-float w-80 sm:w-[500px] h-auto"
             loading="eager"
           />
           {/* Features */}

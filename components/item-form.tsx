@@ -32,6 +32,26 @@ export default function ItemForm({ onAdd }: { onAdd: (data: any) => void }) {
 
   function submit() {
     if (!name.trim()) return
+    // Logic to determine recyclable, reusable, hazardous
+    let recyclable = false, reusable = false, hazardous = false;
+    // Recyclable categories
+    if (["Computer", "Projector", "Lab Equipment", "Mobile Device", "Accessory"].includes(category) && ["Poor", "Dead"].includes(condition)) {
+      recyclable = true;
+    }
+    // Hazardous categories
+    if (["Battery"].includes(category)) {
+      hazardous = true;
+      recyclable = true; 
+    }
+
+    if (name.toLowerCase().includes("acid") || notes.toLowerCase().includes("acid")) {
+      hazardous = true;
+    }
+    // Reusable logic: good/fair condition and not hazardous
+    if (["Computer", "Projector", "Lab Equipment", "Mobile Device", "Accessory"].includes(category) && ["Good", "Fair"].includes(condition)) {
+      reusable = true;
+    }
+    // You can add more rules for other categories as needed
     onAdd({
       name,
       department,
@@ -39,6 +59,9 @@ export default function ItemForm({ onAdd }: { onAdd: (data: any) => void }) {
       ageMonths: Number(ageMonths),
       condition,
       notes,
+      recyclable,
+      reusable,
+      hazardous,
     })
     setName("")
     setAgeMonths(12)

@@ -1,4 +1,4 @@
-// File: /Users/deepakmani664/Desktop/e-waste-management copy 3/app/page.tsx
+// File: /Users/deepakmani664/Desktop/e-waste-management copy 4/app/page.tsx
 import * as entry from '../../../app/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

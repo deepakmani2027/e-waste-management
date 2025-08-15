@@ -89,16 +89,16 @@ export default function Scheduling({
           <CardTitle>Create Pickup</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="grid gap-2 col-span-2">
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-2">
               <Label htmlFor="delivery-address">Delivery Address <span className="text-red-500">*</span></Label>
               <Input id="delivery-address" value={deliveryAddress} onChange={e => setDeliveryAddress(e.target.value)} placeholder="Enter delivery address" required />
             </div>
-            <div className="grid gap-2">
+            <div className="flex flex-col gap-2">
               <Label htmlFor="date">Pickup Date</Label>
               <Input id="date" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
             </div>
-            <div className="grid gap-2">
+            <div className="flex flex-col gap-2">
               <Label>Vendor</Label>
               <Select value={vendorId} onValueChange={setVendorId}>
                 <SelectTrigger><SelectValue placeholder="Select vendor" /></SelectTrigger>
