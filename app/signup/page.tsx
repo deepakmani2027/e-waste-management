@@ -48,7 +48,7 @@ function SignupScreen() {
     setPending(true)
     const res = await signup(name, email, password)
     setPending(false)
-    if (res.ok) router.replace("/")
+    if (res.ok) router.replace("/#dashboard")
     else setError(res.message)
   }
 

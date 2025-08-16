@@ -40,10 +40,16 @@ function LoginScreen() {
     e.preventDefault()
     setPending(true)
     setError(null)
-    const res = await login(email, password)
-    setPending(false)
-  if (res.ok) router.replace("/")
-    else setError(res.message)
+  //   const res = await login(email, password)
+  //   setPending(false)
+  // if (res.ok) router.replace("/")
+  //   else setError(res.message)
+  // }
+
+  const res = await login(email, password)
+  setPending(false)
+  if (res.ok) router.replace("/#dashboard")
+  else setError(res.message)
   }
 
   return (
